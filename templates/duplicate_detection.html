@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Duplicate Photo Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .image-preview {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .image-preview img {
+            width: 200px;
+            margin: 10px;
+        }
+    </style>
+    <script>
+        // Function to display duplicate images
+        function displayDuplicateImages() {
+            var duplicateImages = {{ duplicate_images|safe }};
+            var imagePreviewDiv = document.getElementById('image-preview');
+            imagePreviewDiv.innerHTML = '';
+
+            for (var i = 0; i < duplicateImages.length; i++) {
+                var img = document.createElement('img');
+                img.src = duplicateImages[i];
+                img.alt = 'Duplicate Image';
+                imagePreviewDiv.appendChild(img);
+            }
+        }
+
+        // Call the function to display duplicate images when the DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            displayDuplicateImages();
+        });
+    </script>
+</head>
+<body>
+    <h1>Duplicate Photo Detection</h1>
+    <form action="/duplicate_detection" method="post" enctype="multipart/form-data">
+        <label for="folder_path">Select a folder:</label>
+        <input type="file" name="folder_path" id="folder_path" webkitdirectory directory required>
+        <button type="submit">Detect Duplicates</button>
+    </form>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li style="color: {% if 'danger' in message %}red{% elif 'success' in message %}green{% elif 'warning' in message %}orange{% else %}black{% endif %};">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Display duplicate images -->
+    <h2>Duplicate Images:</h2>
+    <div id="image-preview" class="image-preview"></div>
+</body>
+</html>

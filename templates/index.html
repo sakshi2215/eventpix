@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Closed Eye Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        font-size: 14px; /* Adjust the font size as needed */
+    }
+
+    li {
+        margin-bottom: 10px;
+        font-size: 14px; /* Adjust the font size as needed */
+    }
+        h1 {
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input[type="file"] {
+            margin-right: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        h2 {
+            color: #333;
+            margin-top: 20px;
+        }
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        a {
+            text-decoration: none;
+            color: #337ab7;
+        }
+        a:hover {
+            color: #23527c;
+        }
+    </style>
+    <script>
+        function updateFolderName() {
+            var input = document.getElementById('folder');
+            var selectedFolderName = input.files[0] ? input.files[0].name : 'No folder selected';
+            document.getElementById('selected-folder-name').innerText = selectedFolderName;
+        }
+    
+        document.addEventListener('DOMContentLoaded', function() {
+            var input = document.getElementById('folder');
+            input.addEventListener('change', updateFolderName);
+        });
+    </script>
+</head>
+<body>
+    <h1>Closed Eye Detection</h1>
+    <form action="/" method="post" enctype="multipart/form-data">
+        <input type="file" name="files[]" accept=".jpg, .jpeg, .png" multiple required>
+        <button type="submit">Upload</button>
+    </form>
+
+    <h2>Other Options:</h2>
+    <ul>
+        <li><a href="/emotion_prediction.html">Emotion Prediction</a></li>
+        <li><a href="/blur_detection.html">Blur Detection</a></li>
+        <li><a href="/duplicate_detection.html">Duplicate Photo Detection</a></li>
+        <!-- <li><a href="/headtilt.html">HeadTilt Detection</a></li> -->
+        <li><a href="/filter.html">Apply Filters</a></li>
+        <!-- Add more options as needed -->
+    </ul>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li style="color: {% if 'danger' in message %}red{% elif 'success' in message %}green{% elif 'warning' in message %}orange{% else %}black{% endif %};">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+  <!-- Display images and outputs -->
+  {% if images_outputs %}
+  <h2>Image Outputs:</h2>
+  <div class="image-outputs">
+      {% for image_output in images_outputs %}
+          <div class="image-output">
+              <img src="{{ image_output.image_path }}" alt="Image">
+              <p>Output: {{ image_output.output }}</p>
+          </div>
+      {% endfor %}
+  </div>
+  {% endif %}
+
+
+</body>
+</html>
+
+
+

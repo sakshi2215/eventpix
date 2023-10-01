@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Emotion Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center; /* Center align content */
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px; /* Add some space below the heading */
+        }
+        form {
+            margin-bottom: 20px; /* Add some space below the form */
+        }
+        input[type="file"] {
+            margin-right: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+            text-align: left; /* Align list items to the left */
+        }
+        li.success {
+            color: green;
+        }
+        li.error {
+            color: red;
+        }
+        li.warning {
+            color: orange;
+        }
+    </style>
+</head>
+<body>
+    <h1>Emotion Prediction</h1>
+    <form action="/detect_emotion" method="post" enctype="multipart/form-data">
+        <input type="file" name="emotion_file" accept=".jpg, .jpeg, .png" required>
+        <button type="submit">Predict Emotion</button>
+    </form>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li class="{% if 'danger' in message %}error{% elif 'success' in message %}success{% elif 'warning' in message %}warning{% else %}default{% endif %}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</body>
+</html>
