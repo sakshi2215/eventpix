@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Apply Filter</title>
+    <title>Closed Eye Detection</title>
 </head>
 <body>
-    <h1>Headtilt Detection</h1>
-    <form action="/start_program" method="post" enctype="multipart/form-data">
-        <input type="file" name="headtilt_file" accept=".jpg, .jpeg, .png" required>
-        <button type="submit">Headtilt Detection</button>
+    <h1>Closed Eye Detection</h1>
+    <form action="/closed_eye" method="post" enctype="multipart/form-data">
+        <input type="file" name="closed_eye_file" accept=".jpg, .jpeg, .png" required>
+        <button type="submit">Detection</button>
     </form>
 
     {% with messages = get_flashed_messages() %}

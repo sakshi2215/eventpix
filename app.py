@@ -2,7 +2,7 @@ from flask import Flask, request, render_template, redirect, url_for, flash, sen
 import os
 import shutil
 from emotion_detection import predict_emotion  # Import your emotion prediction function
-from tensorflow.keras.models import load_model
+# from tensorflow.keras.models import load_model
 from image_processing import process_image
 from werkzeug.utils import secure_filename
 import cv2
@@ -28,8 +28,8 @@ app.secret_key = 'your_secret_key'
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-# Load your machine learning model
-model = load_model('models\my_model.h5')
+# # Load your machine learning model
+# model = load_model('models\my_model.h5')
 mp_face_detection = mp.solutions.face_detection
 # Define the allowed file extensions
 ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png'}
@@ -38,39 +38,31 @@ ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png'}
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route('/', methods=['GET', 'POST'])
-def upload_photo():
-    images_outputs = []
-    if request.method == 'POST':
-        files = request.files.getlist('files[]')
 
-        for file in files:
-            if file and allowed_file(file.filename):
-                file_path = os.path.join('uploads', file.filename)
-                file.save(file_path)
-                result = process_image(file_path, model)
-                 # Create dictionary for image and output
-                image_output = {
-                    'image_path': file_path,
-                    'output': result if result else 'Unable to determine eye status'
-                }
-                images_outputs.append(image_output)
-
-                if result:
-                    output_folder = os.path.join('output', 'closed_eyes' if result == 'Closed Eyes' else 'open_eyes')
-                    os.makedirs(output_folder, exist_ok=True)
-
-                    # Move the file to the appropriate output folder
-                    output_file_path = os.path.join(output_folder, file.filename)
-                    shutil.move(file_path, output_file_path)
-
-                    flash('Eye status for ' + file.filename + ': ' + result, 'success')
-                else:
-                    flash('Unable to determine eye status for ' + file.filename, 'warning')
-
-        return render_template('index.html', image_output=image_output)
-
+@app.route('/')
+def index():
     return render_template('index.html')
+
+@app.route('/closed_eye.html')
+def closed_eye_prediction():
+    return render_template('closed_eye.html')
+
+@app.route('/closed_eye', methods=['GET', 'POST'])
+def detect_closed_eye():
+    files = request.files.getlist('closed_eye_file')
+    for file in files:
+        if file and allowed_file(file.filename):
+            file_path = os.path.join('uploads', file.filename)
+            file.save(file_path)
+
+        result = process_image(file_path)
+
+        if result:
+            flash('Eye status for ' + file.filename + ': ' + result, 'success')
+        else:
+            flash('Unable to determine eye status for ' + file.filename, 'warning')
+
+    return render_template('closed_eye.html')
 
 @app.route('/emotion_prediction.html')
 def emotion_prediction_page():

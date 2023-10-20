@@ -1,6 +1,7 @@
 import cv2 as cv
 import numpy as np
 import mediapipe as mp
+from tensorflow.keras.models import load_model
 
 #Constants
 FONTS = cv.FONT_HERSHEY_COMPLEX
@@ -13,6 +14,8 @@ LEFT_EYE = [362, 382, 381, 380, 374, 373, 390, 249, 263, 466, 388, 387, 386, 385
 
 # Right eye indices
 RIGHT_EYE = [33, 7, 163, 144, 145, 153, 154, 155, 133, 173, 157, 158, 159, 160, 161, 246]
+# Load your machine learning model
+model = load_model('models\my_model.h5')
 
 map_face_mesh = mp.solutions.face_mesh
 
@@ -40,7 +43,7 @@ def predict_eye_state(model, eye_image):
 
     return prediction[0]
 
-def process_image(image_path, model):
+def process_image(image_path):
     image = cv.imread(image_path)
     if image is None:
         return None

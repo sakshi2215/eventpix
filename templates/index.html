@@ -1,64 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Closed Eye Detection</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-        }
-
-        ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        font-size: 14px; /* Adjust the font size as needed */
-    }
-
-    li {
-        margin-bottom: 10px;
-        font-size: 14px; /* Adjust the font size as needed */
-    }
-        h1 {
-            color: #333;
-        }
-        form {
-            margin-bottom: 20px;
-        }
-        input[type="file"] {
-            margin-right: 10px;
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        h2 {
-            color: #333;
-            margin-top: 20px;
-        }
-        ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-        li {
-            margin-bottom: 10px;
-        }
-        a {
-            text-decoration: none;
-            color: #337ab7;
-        }
-        a:hover {
-            color: #23527c;
-        }
-    </style>
-    <script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EVENTPIX</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <style>body {
+    padding-top: 70px;
+    margin-bottom: 70px;
+  }
+  
+  .header {
+    background-color: #343a40;
+    padding: 20px;
+    color: white;
+  }
+  
+  .circular-container {
+    text-align: center;
+  }
+  
+  .circular-section {
+    display: inline-block;
+    width: 150px; /* Reduce the width to make the sections smaller */
+    height: 150px; /* Reduce the height accordingly */
+    border-radius: 50%;
+    background-color: #ccc;
+    text-align: center;
+    padding: 20px;
+    margin: 10px 10px;
+  }
+  
+  .circular-section h2 {
+    font-size: 1.5em;
+  }
+  
+  .footer {
+    background-color: #343a40;
+    color: white;
+    padding: 10px;
+  }</style>
+</head>
+    <!-- <script>
         function updateFolderName() {
             var input = document.getElementById('folder');
             var selectedFolderName = input.files[0] ? input.files[0].name : 'No folder selected';
@@ -69,51 +52,69 @@
             var input = document.getElementById('folder');
             input.addEventListener('change', updateFolderName);
         });
-    </script>
-</head>
+    </script> -->
 <body>
-    <h1>Closed Eye Detection</h1>
-    <form action="/" method="post" enctype="multipart/form-data">
-        <input type="file" name="files[]" accept=".jpg, .jpeg, .png" multiple required>
-        <button type="submit">Upload</button>
-    </form>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
 
-    <h2>Other Options:</h2>
-    <ul>
-        <li><a href="/emotion_prediction.html">Emotion Prediction</a></li>
-        <li><a href="/blur_detection.html">Blur Detection</a></li>
-        <li><a href="/duplicate_detection.html">Duplicate Photo Detection</a></li>
-        <!-- <li><a href="/headtilt.html">HeadTilt Detection</a></li> -->
-        <li><a href="/filter.html">Apply Filters</a></li>
-        <!-- Add more options as needed -->
-    </ul>
-
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul>
-                {% for message in messages %}
-                    <li style="color: {% if 'danger' in message %}red{% elif 'success' in message %}green{% elif 'warning' in message %}orange{% else %}black{% endif %};">{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
-
-  <!-- Display images and outputs -->
-  {% if images_outputs %}
-  <h2>Image Outputs:</h2>
-  <div class="image-outputs">
-      {% for image_output in images_outputs %}
-          <div class="image-output">
-              <img src="{{ image_output.image_path }}" alt="Image">
-              <p>Output: {{ image_output.output }}</p>
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col-md-12 header">
+            <h1 class="text-center">EVENTPIX</h1>
           </div>
-      {% endfor %}
-  </div>
-  {% endif %}
+        </div>
+      
+        <div class="row mt-5">
+          <div class="col-md-12 circular-container">
+            <div class="circular-section">
+              <h2><a href="/emotion_prediction.html">EMOTION DETECTION</a> </h2>
 
-
-</body>
-</html>
-
-
-
+            </div>
+            <div class="circular-section">
+              <h2><a href="/closed_eye.html">CLOSED EYE DETECTION</a></h2>
+              
+            </div>
+            <div class="circular-section">
+              <h2><a href="/filter.html">APPLY FILTERS</a></h2>
+              
+            </div>
+            <div class="circular-section">
+              <h2><a href="/blur_detection.html">BLUR DETECTION</a></h2>
+              
+            </div>
+            <div class="circular-section">
+              <h2><a href="/duplicate_detection.html">DUPLICATE IMAGE DETECTION</a></h2>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer class="bg-dark text-white py-4 fixed-bottom">
+        <div class="container text-center footer">
+          <p>&copy; 2023 Your Website</p>
+        </div>
+      </footer>
+      
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+      </body>
+      </html>
+       
