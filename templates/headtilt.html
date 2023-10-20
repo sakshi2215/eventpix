@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Apply Filter</title>
+</head>
+<body>
+    <h1>Headtilt Detection</h1>
+    <form action="/start_program" method="post" enctype="multipart/form-data">
+        <input type="file" name="headtilt_file" accept=".jpg, .jpeg, .png" required>
+        <button type="submit">Headtilt Detection</button>
+    </form>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li style="color: {% if 'danger' in message %}red{% elif 'success' in message %}green{% elif 'warning' in message %}orange{% else %}black{% endif %};">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+</body>
+</html>

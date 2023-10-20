@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate Photo filters</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            background-color: #fff;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        select, input[type="file"], input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background: url('dropdown-arrow.png') no-repeat right center;
+            background-size: 20px;
+        }
+
+        input[type="submit"] {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Generate Photo filters</h1>
+    <form action="/filter_detection" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*">
+        <br><br>
+        <h2>Filter for Whole Image:</h2>
+        <label for="filter_type_whole_image">Select filter:</label>
+        <select name="filter_type_whole_image" id="filter_type_whole_image">
+            <option value="none">None</option>
+            <option value="brightness">Brightness</option>
+            <option value="grayscale">Grayscale</option>
+            <option value="saturate">Saturate</option>
+            <option value="sepia">Sepia</option>
+            <option value="_1977">_1977</option>
+            <option value="aden">Aden</option>
+            <option value="brannan">Brannan</option>
+            <option value="brooklyn">Brooklyn</option>
+            <option value="clarendon">Clarendon</option>
+            <option value="gingham">Gingham</option>
+            <option value="hudson">Hudson</option>
+            <option value="inkwell">Inkwell</option>
+            <option value="kelvin">Kelvin</option>
+            <option value="lark">Lark</option>
+            <option value="lofi">Lofi</option>
+            <option value="maven">Maven</option>
+            <option value="mayfair">Mayfair</option>
+            <option value="moon">Moon</option>
+            <option value="nashville">Nashville</option>
+            <option value="perpetua">Perpetua</option>
+            <option value="reyes">Reyes</option>
+            <option value="rise">Rise</option>
+            <option value="slumber">Slumber</option>
+            <option value="stinson">Stinson</option>
+            <option value="toaster">toaster</option>
+            <option value="valencia">Valencia</option>
+            <option value="walden">Walden</option>
+            <option value="willow">Willow</option>
+            <option value="xpro2">Xpro2</option>
+        </select>
+        <br><br>
+        <h2>Filter for Face:</h2>
+        <label for="filter_type_face">Select filter:</label>
+        <select name="filter_type_face" id="filter_type_face">
+            <option value="none">None</option>
+            <option value="blur">Blur</option>
+            <option value="smooth">Smooth</option>
+            <option value="smooth_more">Smooth_More</option>
+            <option value="edge_enhance">Edge_Enhance</option>
+            <option value="edge_enhance_more">Edge_Enhance_More</option>
+            <option value="emboss">Emboss</option>
+            <option value="find_edges">Find_edges</option>
+            <option value="sharpen">Sharpen</option>
+        </select>
+        <br><br>
+        <input type="submit" value="Apply Filters">
+    </form>
+</body>
+</html>
