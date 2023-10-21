@@ -6,24 +6,29 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <title>Emotion Prediction</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center; /* Center align content */
-            padding: 20px;
-            margin-bottom: 70px;
-      background: linear-gradient(270deg, #e8faf6, #b2f3de);
-      background-size: 400% 400%;
+       body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(270deg, #e8faf6, #b2f3de);
+            background-size: 400% 400%;
         }
         h1 {
             color: #333;
-            margin-bottom: 20px; /* Add some space below the heading */
+            margin-bottom: 20px;
         }
+
         form {
-            margin-bottom: 20px; /* Add some space below the form */
+            margin-bottom: 20px;
         }
+
         input[type="file"] {
             margin-right: 10px;
         }
+
         button {
             padding: 10px 20px;
             background-color: #4CAF50;
@@ -31,35 +36,51 @@
             border: none;
             cursor: pointer;
         }
+
         button:hover {
             background-color: #45a049;
         }
+
         ul {
             list-style-type: none;
             margin: 0;
             padding: 0;
         }
+
         li {
             margin-bottom: 10px;
-            text-align: center; /* Align list items to the left */
         }
+
+        /* Center the list items */
+        li {
+            text-align: center;
+        }
+
         li.success {
             color: green;
         }
+
         li.error {
             color: red;
         }
+
         li.warning {
             color: orange;
         }
+
         .header {
-      padding: 20px;
-      color: rgb(70, 109, 97);
-    }
-    
-    .footer {
-      color: white;
-    }
+            padding: 20px;
+            color: rgb(70, 109, 97);
+        }
+
+        .footer {
+            color: white;
+        }
+
+        /* Reduce the size of the image */
+        img {
+            max-width: 100%; /* Adjust the maximum width as needed */
+        }
     </style>
 </head>
 <body>

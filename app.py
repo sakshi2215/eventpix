@@ -27,8 +27,6 @@ app.secret_key = 'your_secret_key'
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-# # Load your machine learning model
-# model = load_model('models\my_model.h5')
 mp_face_detection = mp.solutions.face_detection
 # Define the allowed file extensions
 ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png'}
