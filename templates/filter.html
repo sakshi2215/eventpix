@@ -2,13 +2,26 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EVENTPIX</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <title>Generate Photo filters</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
+            background: linear-gradient(270deg, #e8faf6, #b2f3de);
+            padding-top: 70px;
+            margin-bottom: 100px;
+        }
+
+        .header {
+            padding: 20px;
+            color: rgb(70, 109, 97);
+        } 
+        .footer {
+        color: white;
+
         }
 
         h1 {
@@ -31,7 +44,7 @@
 
         select, input[type="file"], input[type="submit"] {
             width: 100%;
-            padding: 10px;
+            padding: 8px;
             margin: 8px 0;
             border: 1px solid #ccc;
             border-radius: 5px;
@@ -59,14 +72,34 @@
     </style>
 </head>
 <body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="{{ url_for('index') }}">EVENTPIX</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('about') }}">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
     <h1>Generate Photo filters</h1>
     <form action="/filter_detection" method="post" enctype="multipart/form-data">
         <input type="file" name="file" accept="image/*">
         <br><br>
-        <h2>Filter for Whole Image:</h2>
-        <label for="filter_type_whole_image">Select filter:</label>
+    
+        <label for="filter_type_whole_image">Filter for Whole Image:</label>
         <select name="filter_type_whole_image" id="filter_type_whole_image">
-            <option value="none">None</option>
+            <option value="none">Select filter</option>
             <option value="brightness">Brightness</option>
             <option value="grayscale">Grayscale</option>
             <option value="saturate">Saturate</option>
@@ -98,10 +131,9 @@
             <option value="xpro2">Xpro2</option>
         </select>
         <br><br>
-        <h2>Filter for Face:</h2>
-        <label for="filter_type_face">Select filter:</label>
+        <label for="filter_type_face">Filter for face:</label>
         <select name="filter_type_face" id="filter_type_face">
-            <option value="none">None</option>
+            <option value="none">Select filter</option>
             <option value="blur">Blur</option>
             <option value="smooth">Smooth</option>
             <option value="smooth_more">Smooth_More</option>
@@ -114,5 +146,13 @@
         <br><br>
         <input type="submit" value="Apply Filters">
     </form>
+    <footer class="bg-dark text-white py-2 fixed-bottom">
+      <div class="container text-center footer">
+          <p>Eventpix</p>
+      </div>
+    </footer>
+      
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>

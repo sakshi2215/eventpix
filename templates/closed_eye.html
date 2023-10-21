@@ -1,24 +1,86 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Closed Eye Detection</title>
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EVENTPIX</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <style>
+  body {
+    padding-top: 70px;
+    margin-bottom: 70px;
+    background: linear-gradient(270deg, #e8faf6, #b2f3de);
+    background-size: 400% 400%;
+  }
+  
+  .header {
+    padding: 20px;
+    color: rgb(70, 109, 97);
+  }
+  
+  .footer {
+    color: white;
+  }
+  </style>
+<script>
+    function updateFileName() {
+        var input = document.getElementById('photo');
+        var selectedFileName = input.files[0] ? input.files[0].name : 'No file selected';
+        document.getElementById('selected-file-name').innerText = selectedFileName;
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var input = document.getElementById('photo');
+        input.addEventListener('change', updateFileName);
+    });
+</script>
+
+<title>Closed Eye Detection</title>
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="{{ url_for('index') }}">EVENTPIX</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('about') }}">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
     <h1>Closed Eye Detection</h1>
     <form action="/closed_eye" method="post" enctype="multipart/form-data">
-        <input type="file" name="closed_eye_file" accept=".jpg, .jpeg, .png" required>
-        <button type="submit">Detection</button>
+        <label for="photo" class="custom-file-upload">Choose File</label>
+        <input type="file" id="photo"  name="closed_eye_file" accept=".jpg, .jpeg, .png" required>
+        <button type="submit">Detect</button>
     </form>
+    <p id="selected-file-name">No file selected</p>
 
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul>
-                {% for message in messages %}
-                    <li style="color: {% if 'danger' in message %}red{% elif 'success' in message %}green{% elif 'warning' in message %}orange{% else %}black{% endif %};">{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
+    {% if result %}
+        <!-- <h2>Result</h2> -->
+        <div class="image-box">
+            <h2>{{ result }}</h2>
+            <img src="{{ image_path }}" alt="Input Image">
+            
+        </div>
+    {% endif %}
+    <footer class="bg-dark text-white py-2 fixed-bottom">
+        <div class="container text-center footer">
+            <p>Eventpix</p>
+        </div>
+      </footer>
+      
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 </body>
 </html>

@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EVENTPIX</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <title>Filter Result</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background: linear-gradient(270deg, #e8faf6, #b2f3de);
+            background-size: 400% 400%;
             margin: 0;
             padding: 0;
         }
@@ -27,6 +32,9 @@
             border: 2px solid #ccc;
             border-radius: 5px;
         }
+        .footer {
+        color: white;
+        }
     </style>
 </head>
 <body>
@@ -40,5 +48,12 @@
 
     <h2>Filtered Face:</h2>
     <img src="{{ url_for('uploaded_file', filename=filtered_image_face) }}" alt="Filtered Face">
-</body>
+    <footer class="bg-dark text-white py-2 fixed-bottom">
+        <div class="container text-center footer">
+            <p>Eventpix</p>
+        </div>
+    </footer>
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    </body>
 </html>

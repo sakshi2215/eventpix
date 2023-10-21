@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVENTPIX</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <title>Emotion Prediction</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center; /* Center align content */
             padding: 20px;
+            margin-bottom: 70px;
+      background: linear-gradient(270deg, #e8faf6, #b2f3de);
+      background-size: 400% 400%;
         }
         h1 {
             color: #333;
@@ -35,7 +41,7 @@
         }
         li {
             margin-bottom: 10px;
-            text-align: left; /* Align list items to the left */
+            text-align: center; /* Align list items to the left */
         }
         li.success {
             color: green;
@@ -46,9 +52,36 @@
         li.warning {
             color: orange;
         }
+        .header {
+      padding: 20px;
+      color: rgb(70, 109, 97);
+    }
+    
+    .footer {
+      color: white;
+    }
     </style>
 </head>
 <body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="{{ url_for('index') }}">EVENTPIX</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('about') }}">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
+            </li>
+        </ul>
+    </div>
+</nav>
     <h1>Emotion Prediction</h1>
     <form action="/detect_emotion" method="post" enctype="multipart/form-data">
         <input type="file" name="emotion_file" accept=".jpg, .jpeg, .png" required>
@@ -64,5 +97,13 @@
             </ul>
         {% endif %}
     {% endwith %}
+    <footer class="bg-dark text-white py-2 fixed-bottom">
+      <div class="container text-center footer">
+          <p>Eventpix</p>
+      </div>
+    </footer>
+      
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>

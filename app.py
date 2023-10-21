@@ -15,7 +15,6 @@ import hashlib
 import shutil
 from tkinter import filedialog
 import tkinter as tk
-import cv2
 import mediapipe as mp
 
 from PIL import Image, ImageFilter
@@ -43,26 +42,38 @@ def allowed_file(filename):
 def index():
     return render_template('index.html')
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
 @app.route('/closed_eye.html')
 def closed_eye_prediction():
     return render_template('closed_eye.html')
 
-@app.route('/closed_eye', methods=['GET', 'POST'])
+@app.route('/closed_eye', methods=['POST'])
 def detect_closed_eye():
     files = request.files.getlist('closed_eye_file')
+    result_paths = []
+
     for file in files:
         if file and allowed_file(file.filename):
             file_path = os.path.join('uploads', file.filename)
             file.save(file_path)
 
-        result = process_image(file_path)
+            result = process_image(file_path)
+            result_paths.append(result)
 
-        if result:
-            flash('Eye status for ' + file.filename + ': ' + result, 'success')
-        else:
-            flash('Unable to determine eye status for ' + file.filename, 'warning')
-
-    return render_template('closed_eye.html')
+            if result:
+                flash('Eye status for ' + file.filename + ': ' + result, 'success')
+            else:
+                flash('Unable to determine eye status for ' + file.filename, 'warning')
+    #result_image_path = "static/result.png"
+    #cv2.imwrite(result_image_path, result)
+    return render_template('closed_eye.html', result=result, image_path=file_path)
 
 @app.route('/emotion_prediction.html')
 def emotion_prediction_page():
