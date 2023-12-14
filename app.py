@@ -16,11 +16,9 @@ import shutil
 from tkinter import filedialog
 import tkinter as tk
 import mediapipe as mp
-
 from PIL import Image, ImageFilter
 import pilgram,pilgram.css
 from filter import apply_filter_to_whole_image ,apply_filter_to_face
-
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
@@ -34,7 +32,6 @@ ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png'}
 # Function to check allowed file types
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
 
 @app.route('/')
 def index():
@@ -93,12 +90,11 @@ def detect_emotion():
         else:
             flash('Unable to determine emotion for ' + file.filename, 'warning')
 
-    return render_template('emotion_prediction.html')
+    return render_template('emotion_prediction.html', result = predicted_emotion, image_path=file_path)
 
 @app.route('/blur_detection.html')
 def blur_prediction_page():
     return render_template('blur_detection.html')
-
 
 @app.route('/detect_blur', methods=['POST'])
 def upload_image():
@@ -117,7 +113,6 @@ def upload_image():
 			ratio = image.shape[0] / 500.0
 			orig = image.copy()
 			image = Helpers.resize(image, height = 500)
-
 			gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 			fm = cv2.Laplacian(gray, cv2.CV_64F).var()
 			result = "Not Blurry"
@@ -127,7 +122,6 @@ def upload_image():
 
 			sharpness_value = "{:.0f}".format(fm)
 			message = [result,sharpness_value]
-
 			img = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 			file_object = io.BytesIO()
 			img= Image.fromarray(Helpers.resize(img,width=500))
@@ -195,6 +189,7 @@ def duplicate_detection():
     
     # Return duplicate images as JSON response
     return jsonify(duplicate_images=duplicate_image_paths)
+
 @app.route('/filter.html')
 def filter_page():
     return render_template('filter.html')

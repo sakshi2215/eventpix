@@ -1,0 +1,8 @@
+open git bash 
+
+git add .
+git commit -m "center"
+git push origin master
+
+open github
+pull request under contribute
