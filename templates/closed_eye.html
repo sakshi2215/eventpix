@@ -23,7 +23,7 @@
         }
 
         .footer {
-            color: white;
+            color: white;s
         }
 
         h1, form, .image-box, p {
@@ -52,27 +52,18 @@
         }
     </style>
 
-<script>
-    // Function to display duplicate images
-    function displayDuplicateImages() {
-        var duplicateImages = {{ duplicate_images|safe }};
-        var imagePreviewDiv = document.getElementById('image-preview');
-        imagePreviewDiv.innerHTML = '';
-
-        for (var i = 0; i < duplicateImages.length; i++) {
-            var img = document.createElement('img');
-            img.src = duplicateImages[i];
-            img.alt = 'Duplicate Image';
-            imagePreviewDiv.appendChild(img);
+    <script>
+        function updateFileName() {
+            var input = document.getElementById('photo');
+            var selectedFileName = input.files[0] ? input.files[0].name : 'No file selected';
+            document.getElementById('selected-file-name').innerText = selectedFileName;
         }
-    }
 
-    // Call the function to display duplicate images when the DOM is loaded
-    document.addEventListener('DOMContentLoaded', function() {
-        displayDuplicateImages();
-    });
-</script>
-
+        document.addEventListener('DOMContentLoaded', function() {
+            var input = document.getElementById('photo');
+            input.addEventListener('change', updateFileName);
+        });
+    </script>
     <title>Closed Eye Detection</title>
 </head>
 <body>
@@ -97,8 +88,7 @@
     </nav>
     <h1>Closed Eye Detection</h1>
     <form action="/closed_eye" method="post" enctype="multipart/form-data">
-        <label for="photo" class="custom-file-upload">Choose File</label>
-        <input type="file" id="photo" name="closed_eye_file" accept=".jpg, .jpeg, .png" required>
+        <input class="custom-file-upload" type="file" id="photo" name="closed_eye_file" accept=".jpg, .jpeg, .png" required>
         <button type="submit">Detect</button>
     </form>
 
