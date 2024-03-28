@@ -21,4 +21,7 @@ The system utilizes AI algorithms to identify and segregate low-quality photos b
 5. **Head Tilt Detection:**
    Measure the angle of the head in an image or video to ensure an optimal perspective.
 
+6. **Emotion Detection:**
+   The system shall be equipped to detect and categorize photos based on the emotions displayed by subjects.
+   
 This software aims to streamline the photo curation process, providing photographers with a tool to manage their event photo collections efficiently.
